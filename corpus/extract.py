@@ -20,7 +20,7 @@ def get_users(project):
 
     """
     try:
-        user_list = [user.attributes for user in project.users.list()]
+        user_list = [user.attributes for user in project.users.list(get_all=True)]
         if len(user_list) > 0:
             return user_list
         return None
@@ -257,7 +257,7 @@ class Extractor:
                 if project_dict['visibility'] != "private" or include_private:
                     # extract issue statistics
                     project_dict['issue_statistics'] = \
-                        project.issuesstatistics.get(scope="all").attributes["statistics"]
+                        project.issues_statistics.get(scope="all").attributes["statistics"]
 
                     # extract project languages
                     project_dict['languages'] = project.languages()
