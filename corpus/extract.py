@@ -87,7 +87,7 @@ def get_mergerequests(project):
 
     """
     try:
-        mergerequests = project.mergerequests.list(state='all')
+        mergerequests = project.mergerequests.list(get_all=True)
         mr_list = []
         for mr in mergerequests:
             mr_dict = mr.attributes
@@ -117,7 +117,7 @@ def get_pipelinestatistics(project):
 
     """
     try:
-        pipelines = project.pipelines.list()
+        pipelines = project.pipelines.list(get_all=True)
         pipelines_dict = {"total": 0, "successful": 0, "failed": 0, "canceled": 0, "pending": 0}
         for pipeline in pipelines:
             status = pipeline.attributes['status']
@@ -146,7 +146,7 @@ def get_milestones(project):
 
     """
     try:
-        ms_list = [milestone.attributes for milestone in project.milestones.list()]
+        ms_list = [milestone.attributes for milestone in project.milestones.list(get_all=True)]
         if len(ms_list) > 0:
             return ms_list
         return None
@@ -203,7 +203,7 @@ def get_releases(project):
 
     """
     try:
-        rs_list = [release.attributes for release in project.releases.list()]
+        rs_list = [release.attributes for release in project.releases.list(get_all=True)]
         if len(rs_list) > 0:
             return rs_list
         return None
@@ -243,9 +243,9 @@ class Extractor:
             click.echo("Retrieving projects...")
             objects = manager.list(all=all_elements)  # gets all managers available (for projects, groups, users..)
             if isinstance(manager, ProjectManager):
-                self.extract_projects(objects, include_private)
+                self.extract_projects(objects, all_elements, include_private)
 
-    def extract_projects(self, objects, include_private):
+    def extract_projects(self, objects, all_elements, include_private):
         click.echo("Extracting...")
         with click.progressbar(objects) as bar:
             if self.verbose:
