@@ -20,7 +20,7 @@ def get_users(project):
 
     """
     try:
-        user_list = [user.attributes for user in project.users.list()]
+        user_list = [user.attributes for user in project.users.list(get_all=True)]
         if len(user_list) > 0:
             return user_list
         return None

@@ -11,4 +11,5 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 - Change package management to Poetry
+- Get all users with the updated python-gitlab API
 
