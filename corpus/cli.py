@@ -82,6 +82,9 @@ def extract(config, corpus_data, all_elements, out, include_private):
     extractor = Extractor(config.verbose, config.gl, corpus=corpus_data)
     exporter = Exporter(config, corpus=corpus_data, format_str="json")
 
+    print(f"Extracting all elements? {all_elements}")
+    print(f"Extracting from private projects? {include_private}")
+
     extractor.extract(all_elements=all_elements, include_private=include_private)
     exporter.export(out=out)
 
