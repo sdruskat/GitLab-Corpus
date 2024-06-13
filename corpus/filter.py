@@ -157,7 +157,7 @@ class Filter:
         try:
             with open(filter_file, "r") as f:
                 filters = yaml.full_load(f)
-                if filters["filters"] is not None:  # add all filters to filter list
+                if filters.get("filters", None) is not None:  # add all filters to filter list
                     for filter_option in filters["filters"]:
                         category = filter_option
                         if re.match('.*_languages', category):  # add languages
@@ -166,7 +166,7 @@ class Filter:
                         else:
                             self.filters[category] = filters["filters"][category]  # add all other filters
 
-                if filters["attributes"] is not None:  # add all attributes to be shown in corpus
+                if filters.get("attributes", None) is not None:  # add all attributes to be shown in corpus
                     for attribute in filters["attributes"]:
                         self.attributes.append(attribute)
         except FileNotFoundError:

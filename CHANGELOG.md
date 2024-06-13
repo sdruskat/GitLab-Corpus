@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 - Add missing dependency py2neo
 - Fix incorrect GitLab project object attribute
+- Fix dict access that raises KeyError
 
 ### Changed
 - Change package management to Poetry
